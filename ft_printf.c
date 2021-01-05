@@ -3,72 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 16:03:13 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/05 16:41:30 by mhogg            ###   ########.fr       */
+/*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
+/*   Updated: 2021/01/05 22:28:52 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdarg.h>
-#include <printf.h>
+#include "ft_printf.h"
 
+void	ft_parser(const char **str, t_arg *params);
 
-typedef		struct s_arg
+int	ft_atoi_move(const char **str)
 {
-	int len;
-	int width;
-	int precision;
-	char type;
-	char flag;
-}					t_arg;
+	int num;
 
-#pragma	region	parser
-
-void		ft_printf_parser(const char *str, t_arg *ira)
-{
-	ira->width = 0;
-	ira->precision = -1;
-	ira->flag = '?';
-	int i;
-	
-	i = 0;
-	(void)str;
-	// ira->width = ft_atoi(str[i + 1]);
-	
-	// while (str[i] != '.' || str[i])
-	// {
-	// 	if (str[i] == '.')
-	// 		ira->precision = ft_atoi(str[i + 1]);
-	// 	i++;
-	// }
+	num = 0;
+	if (**str == '\0')
+		return (0);
+	while (**str >= '0' && **str <= '9')
+	{
+		num = num * 10 + (**str - '0');
+		(*str)++;
+	}
+	return (num);
 }
 
-#pragma endregion parser
-
-
-
-int			ft_printf(const char *str, ...)
+int ft_printf(const char *str, ...)
 {
-	int i;
+	t_arg	params;
 	va_list args;
-	t_arg	ira;
-	
-	i = 0;
-	ira.len = 0;
+
+	params.len = 0;
+
+	if (!str)
+		return (-1);
 	va_start(args, str);
-	while (str[i])
+	while (*str)
 	{
-		if (str[i] == '%')
+		if (*str == '%') // && *(str + 1) != '%'
 		{
-			ft_printf_parser((char *)&str[i], &ira);
+			str++;
+			ft_parser(&str, &params);
 		}
 		else
-			ira.len += write(1, &str[i], 1);	
-		i++;
+		{
+			params.len += write(1, str, 1);
+		}
+		str++;
 	}
 	va_end(args);
-	printf("flag [%c] width [%d] precison [%d] type [%c] \n", ira.flag, ira.width, ira.precision, ira.type);
-	return (ira.len);
+	printf("flag [%c] width [%d] precison [%d] type [%c] len [%d]\n", params.flag, params.width, params.precision, params.type, params.len);
+	return (params.len);
+}
+
+void	ft_parser(const char **str, t_arg *params)
+{
+	char	minus;
+
+	params->flag = 0;
+	params->width = 0;
+	params->precision = 0;
+
+	while ((**str == '-' || **str == '0')) 
+	{
+		if (**str == '-')
+			minus = '-';
+		if (**str == '0')
+			params->flag = '0';
+		str++;
+	}
+	if (minus == '-')
+		params->flag = '-';
+	if (**str == '*')
+	{
+		//
+	}
+	
+	else
+		params->width = ft_atoi_move(str);
+	if (**str == '.')
+	{
+		str++;
+		if (**str == '*')
+		{
+			//
+		}
+		else
+			params->precision = ft_atoi_move(str);
+	}
+	if (**str == 'd' || **str == 's' || **str == 'c' || **str == 'p' || **str == 'x' || **str == 'X' || **str == 'i' || **str == 'u' || **str == '%')
+		params->type = **str;
+}
+
+int	main(void)
+{
+		ft_printf("hello %-3.89d    yes \n");
 }
