@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 21:03:29 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/05 22:18:55 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/06 00:14:55 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct  s_arg
 }               t_arg;
 
 int				ft_printf(const char *str, ...);
-void			ft_parser(const char **str, t_arg *params);
+void			ft_parser(const char **str, t_arg *params, va_list args);
 int				ft_atoi_move(const char **str);
 
 #endif

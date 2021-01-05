@@ -1,4 +1,16 @@
-#include "ft_printf.h"
+# include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+
+typedef struct  s_arg
+{
+    int			len;
+    int			width;
+    int     	precision;
+    char		flag;
+    char    	type;
+}               t_arg;
 
 int	ft_atoi_move(const char **str)
 {
@@ -15,7 +27,7 @@ int	ft_atoi_move(const char **str)
 	return (num);
 }
 
-void	ft_parser(const char *str, t_arg *params, va_list args)
+void	ft_parser(const char *str, t_arg *params)
 {
 	char	minus;
 
