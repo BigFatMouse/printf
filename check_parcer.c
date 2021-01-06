@@ -12,7 +12,7 @@ typedef struct  s_arg
     char    	type;
 }               t_arg;
 
-int	ft_atoi_move(const char **str)
+int		ft_atoi(const char **str)
 {
 	int num;
 
@@ -27,7 +27,7 @@ int	ft_atoi_move(const char **str)
 	return (num);
 }
 
-void	ft_parser(const char *str, t_arg *params)
+void	ft_pars(const char *str, t_arg *params)
 {
 	char	minus;
 
@@ -52,7 +52,7 @@ void	ft_parser(const char *str, t_arg *params)
 	// }
 	// else
 	printf("%s\n", str);
-	params->width = ft_atoi_move(&str);
+	params->width = ft_atoi(&str);
 	if (*str == '.')
 	{
 		str++;
@@ -61,7 +61,7 @@ void	ft_parser(const char *str, t_arg *params)
 		// 	//
 		// }
 		// else
-			params->precision = ft_atoi_move(&str);
+			params->precision = ft_atoi(&str);
 	}
 	if (*str == 'd' || *str == 's' || *str == 'c' || *str == 'p' || *str == 'x' 
 		|| *str == 'X' || *str == 'i' || *str == 'u' || *str == '%')
@@ -79,7 +79,7 @@ int	main(void)
 	
 	const char *str = "000000-67.890d";
 	
-	ft_parser(str, &params);
+	ft_pars(str, &params);
 	
 	printf("flag [%c] width [%d] precison [%d] type [%c] \n", params.flag, params.width, params.precision, params.type);
 	return (0);

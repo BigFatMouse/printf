@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 18:14:05 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/05 21:48:03 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/06 13:24:51 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,30 @@ int	ft_atoi_move(const char **str)
 		(*str)++;
 	}
 	return (num);
+}
+
+void	ft_putnbr(int n)
+{
+	int	a;
+
+	if (n == (-2147483648))
+	{
+		write(1, "-2147483648", 11);
+	}
+	else	if (n < 0)
+	{
+		a = n * (-1);
+		write(1, "-", 1);
+		ft_putnbr(a);
+	}
+	else	if (n <= 9)
+	{
+		a = n + 48;
+		write(1, &a, 1);
+	}
+	if (n > 9)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
 }
