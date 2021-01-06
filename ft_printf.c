@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/06 13:51:13 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/06 23:15:34 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_struct_init(t_arg *param)
 {
-	param->len = 0;
 	param->flag = 0;
 	param->width = 0;
 	param->precision = -1;
 	param->type = 0;
+	param->nul = 0;
 }
 
 int		ft_printf(const char *str, ...)
@@ -27,13 +27,18 @@ int		ft_printf(const char *str, ...)
 	va_list args;
 
 	ft_struct_init(&param);
+	param.len = 0;
 	if (!str)
 		return (-1);
 	va_start(args, str);
 	while (*str)
 	{
-		if ((*str == '%') && (*(++str) != '%'))
+		if (*str == '%')
+		{
+			str++;
 			ft_parser(&str, &param, &args);
+			ft_processor(&param, &args);
+		}
 		else
 			param.len += write(1, str, 1);
 		str++;
@@ -89,8 +94,9 @@ void	ft_pars_flag(const char **str, t_arg *param)
 
 void	ft_processor(t_arg *param, va_list *args)
 {
-	if (param->type = 'd')
-		ft_putnbr(va_arg(*args, int));
+	if (param->type == 'd' || param->type == 'i')
+		ft_print_d(va_arg(*args, int), param);
+	// if (param->type == 'c')
+	// 	ft_print_c(va_arg(*args, char), param);
+		
 }
-
-//ft_print_d()
