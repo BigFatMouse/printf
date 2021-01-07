@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:24:18 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 13:27:53 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 14:26:11 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_print_d_part2(int num, int numlen, int nulls, t_arg *param)
 	{
 		ft_put_minus(num, param);
 		ft_put_precision(nulls, param);
-		ft_putnbr(num, param);
+		ft_putnbr((long)num, param);
 		ft_put_width(numlen, param);
 	}
 	else	if (param->flag == '0')
@@ -74,13 +74,13 @@ void	ft_print_d_part2(int num, int numlen, int nulls, t_arg *param)
 		ft_put_minus(num, param);
 		ft_put_width(numlen, param);
 		ft_put_precision(nulls, param);
-		ft_putnbr(num, param);
+		ft_putnbr((long)num, param);
 	}
 	else
 	{
 		ft_put_width(numlen, param);
 		ft_put_minus(num, param);
 		ft_put_precision(nulls, param);
-		ft_putnbr(num, param);
+		ft_putnbr((long)num, param);
 	}
 }

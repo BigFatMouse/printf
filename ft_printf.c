@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 13:08:06 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 15:44:59 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,18 @@ void	ft_parser(const char **str, t_arg *param, va_list *args)
 	ft_pars_flag(str, param);
 	if (**str == '*')
 	{
-		param->width = va_arg(*args, int);
+		if ((param->width = va_arg(*args, int)) < 0)
+		{
+			param->width = -(param->width);
+			param->flag = '-';
+		}
 		(*str)++;
 	}
 	else
 		param->width = ft_atoi_move(str);
 	if (**str == '.')
 	{
-		(*str)++;
-		if (**str == '*')
+		if (*(++(*str)) == '*')
 		{
 			param->precision = va_arg(*args, int);
 			(*str)++;
@@ -69,9 +72,8 @@ void	ft_parser(const char **str, t_arg *param, va_list *args)
 		else
 			param->precision = ft_atoi_move(str);
 	}
-	if (**str == 'd' || **str == 's' || **str == 'c'
-		|| **str == 'p' || **str == 'x' || **str == 'X'
-		|| **str == 'i' || **str == 'u' || **str == '%')
+	if (**str == 'd' || **str == 's' || **str == 'c' || **str == 'p' || **str
+	== 'x' || **str == 'X' || **str == 'i' || **str == 'u' || **str == '%')
 		param->type = **str;
 }
 
@@ -97,6 +99,6 @@ void	ft_processor(t_arg *param, va_list *args)
 	if (param->type == 'd' || param->type == 'i')
 		ft_print_d(va_arg(*args, int), param);
 	// if (param->type == 'c')
-	// 	ft_print_c(va_arg(*args, char), param);
+	// ft_print_c(va_arg(*args, char), param);
 		
 }

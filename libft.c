@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 18:14:05 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 12:11:20 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 15:59:39 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ int		ft_atoi_move(const char **str)
 	return (num);
 }
 
-void	ft_putnbr(int n, t_arg *param)
+void	ft_putnbr(long num, t_arg *param)
 {
-	int	a;
+	unsigned long	a;
+	unsigned long	n;
 	
 	if (param->nul == 1)
 		return ;
-	if (n < 0)
-		n = -n;
+	if (num < 0 )
+		num = -num;
+	n = (unsigned long)num;
 	if (n <= 9)
 	{
 		a = n + 48;
@@ -52,18 +54,17 @@ void	ft_putnbr(int n, t_arg *param)
 	}
 }
 
-int		ft_numlen(int n)
+int		ft_numlen(long num)
 {
-	int len;
+	int 			len;
+	unsigned long	n;
 	
-	if (n == 0)
+	if (num == 0)
 		return (1);
 	len = 0;
-	if (n < 0)
-	{
-		n = -n;
-		//len++;
-	}
+	if (num < 0)
+		num = -num;
+	n = (unsigned long)num;
 	while (n > 0)
 	{
 		n = n / 10;

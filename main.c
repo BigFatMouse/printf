@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:00:12 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 13:04:50 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 16:21:44 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,14 @@ int	main(void)
 	// printf("   printf: |%-5.10d|\n", -123456789);
 	// ft_printf("ft_printf: |%-5.10d|\n", -123456789);
 	
-	//printf("-------------3d error-----------\n");
-	printf("   printf: |%08.3d|\n", -11111);
-	ft_printf("ft_printf: |%08.3d|\n", -11111);
-	printf("   printf: |%08.3d|\n", -42);
-	ft_printf("ft_printf: |%08.3d|\n", -42);
+	//printf("-------------4d error-----------\n");
+	// printf("   printf: |%08.3d|\n", -11111);
+	// ft_printf("ft_printf: |%08.3d|\n", -11111);
+	// printf("   printf: |%*i|\n", -4, 9);
+	// ft_printf("ft_printf: |%*i|\n", -4, 9);
+	
+	printf("   printf: |%d|\n", -12);
+	ft_printf("ft_printf: |%d|\n", -12);
+	
+	
 }
