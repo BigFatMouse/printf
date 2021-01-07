@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:24:18 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 12:14:34 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 13:27:53 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,36 @@ void	ft_put_width(int numlen, t_arg *param)
 
 void	ft_put_precision(int nulls, t_arg *param)
 {
-	while (nulls)
-	{
+	while (nulls--)
 		ft_putchar('0', param);
-		nulls--;
-	}
-	
 }
 
 void	ft_print_d(int num, t_arg *param)
 {
 	int	numlen;
 	int	nulls;
-	
+
 	numlen = ft_numlen(num);
 	nulls = 0;
-	
 	if (num == 0 && param->precision == 0)
 	{
 		numlen--;
 		param->nul = 1;
 	}
+	if ((param->precision >= 0) && (param->flag == '0'))
+		param->flag = 0;
 	if (param->precision > numlen)
 	{
 		nulls = param->precision - numlen;
-		// if (num < 0)
-		// {
-		// 	param->width--;
-		// 	nulls++;
-		// }
 		numlen = param->precision;
-		if (param->flag == '0')
-			param->flag = 0;
 	}
 	if (num < 0)
-	 	numlen++;
+		numlen++;
+	ft_print_d_part2(num, numlen, nulls, param);
+}
+
+void	ft_print_d_part2(int num, int numlen, int nulls, t_arg *param)
+{
 	if (param->flag == '-')
 	{
 		ft_put_minus(num, param);
@@ -74,7 +69,7 @@ void	ft_print_d(int num, t_arg *param)
 		ft_putnbr(num, param);
 		ft_put_width(numlen, param);
 	}
-	else	if (param->flag == '0') 
+	else	if (param->flag == '0')
 	{
 		ft_put_minus(num, param);
 		ft_put_width(numlen, param);
@@ -89,12 +84,3 @@ void	ft_print_d(int num, t_arg *param)
 		ft_putnbr(num, param);
 	}
 }
-
-
-
-
-// void ft_print_c(char c, t_arg *param)
-// {
-// 	write(1, &c, 1);
-// 	param->len++;
-// }

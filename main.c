@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:00:12 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 11:51:26 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 13:04:50 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,20 @@ int	main(void)
 	// printf("   printf: |%010.5d|\n", -123);
 	// ft_printf("ft_printf: |%010.5d|\n", -123);
 	
-	printf("-------------3d error-----------\n");
+	//printf("-------------3d error-----------\n");
 	// // printf("%5.10d\n", -123456789);
     // // printf("%05.10d\n", -123456789);
     // // printf("%-5.10d\n", -123456789);
-	printf("   printf: |%5.6d|\n", -11111);
-	ft_printf("ft_printf: |%5.6d|\n", -11111);
+	// printf("   printf: |%5.6d|\n", -11111);
+	// ft_printf("ft_printf: |%5.6d|\n", -11111);
 	// printf("   printf: |%05.10d|\n", -123456789);
 	// ft_printf("ft_printf: |%05.10d|\n", -123456789);
 	// printf("   printf: |%-5.10d|\n", -123456789);
 	// ft_printf("ft_printf: |%-5.10d|\n", -123456789);
+	
+	//printf("-------------3d error-----------\n");
+	printf("   printf: |%08.3d|\n", -11111);
+	ft_printf("ft_printf: |%08.3d|\n", -11111);
+	printf("   printf: |%08.3d|\n", -42);
+	ft_printf("ft_printf: |%08.3d|\n", -42);
 }

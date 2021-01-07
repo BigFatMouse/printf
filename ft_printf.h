@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 21:03:29 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/06 23:15:02 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 13:20:36 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_putnbr(int n, t_arg *param);
 int		ft_numlen(int n);
 void	ft_putchar(char c, t_arg *param);
 void 	ft_print_d(int num, t_arg *param);
+void	ft_print_d_part2(int num, int numlen, int nulls, t_arg *param);
 void 	ft_print_c(char c, t_arg *param);
 
 #endif
