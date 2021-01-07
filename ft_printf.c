@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 15:44:59 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 22:08:35 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,18 @@ void	ft_pars_flag(const char **str, t_arg *param)
 
 void	ft_processor(t_arg *param, va_list *args)
 {
+	char	*str;
+	
 	if (param->type == 'd' || param->type == 'i')
 		ft_print_d(va_arg(*args, int), param);
-	// if (param->type == 'c')
-	// ft_print_c(va_arg(*args, char), param);
-		
+	if (param->type == 's')
+	{
+		if (!(str = va_arg(*args, char *)))
+			str = "(null)";
+		ft_print_s(str, param);
+	}
+	if (param->type == 'c')
+		ft_print_c(va_arg(*args, int), param);
+	if (param->type == '%')
+		ft_print_c('%', param);
 }

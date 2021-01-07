@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 18:14:05 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 15:59:39 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 19:28:48 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,28 @@ int		ft_numlen(long num)
 	return (len);
 }
 
+void	ft_putstr(char *str, int strlen, t_arg *param)
+{
+	if (str)
+		while (strlen && *str)
+		{
+			ft_putchar(*str++, param);
+			strlen--;
+		}
+}
+
+int		ft_strlen(char *str)
+{
+	int	i;
+	
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
 // int main(void)
 // {
-// 	printf("%d", ft_numlen(123));
+// 	int len = ft_strlen("hello");
+// 	printf("%d", len);
 // }
