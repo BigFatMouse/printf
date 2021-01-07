@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/06 23:15:34 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/07 12:13:12 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_printf(const char *str, ...)
 		str++;
 	}
 	va_end(args);
-	printf("flag [%c] width [%d] precison [%d] type [%c] len [%d]\n", param.flag, param.width, param.precision, param.type, param.len);
+	//printf("flag [%c] width [%d] precison [%d] type [%c] len [%d]\n", param.flag, param.width, param.precision, param.type, param.len);
 	return (param.len);
 }
 
