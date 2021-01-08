@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 18:14:05 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 19:28:48 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/09 02:45:29 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,12 @@ int		ft_atoi_move(const char **str)
 	return (num);
 }
 
-void	ft_putnbr(long num, t_arg *param)
+void	ft_putnbr(unsigned n, t_arg *param)
 {
-	unsigned long	a;
-	unsigned long	n;
+	unsigned	a;
 	
 	if (param->nul == 1)
 		return ;
-	if (num < 0 )
-		num = -num;
-	n = (unsigned long)num;
 	if (n <= 9)
 	{
 		a = n + 48;
@@ -54,20 +50,56 @@ void	ft_putnbr(long num, t_arg *param)
 	}
 }
 
-int		ft_numlen(long num)
+int		ft_numlen(unsigned num)
 {
-	int 			len;
-	unsigned long	n;
+	int 		len;
 	
 	if (num == 0)
 		return (1);
 	len = 0;
-	if (num < 0)
-		num = -num;
-	n = (unsigned long)num;
-	while (n > 0)
+	while (num > 0)
 	{
-		n = n / 10;
+		num = num / 10;
+		len++;
+	}
+	return (len);
+}
+
+void	ft_putnbr_hex(unsigned num, t_arg *param)
+{
+	unsigned	a;
+	int			toupper;
+	
+	if (param->nul == 1)
+		return ;
+	toupper = 0;
+	if (param->type == 'X')
+		toupper = 32;
+	if (num < 16)
+	{
+		if (num < 10)
+			a = num + 48;
+		else
+			a = num - 10  + 'a' - toupper;
+		ft_putchar(a, param);
+	}
+	if (num >= 16)
+	{
+		ft_putnbr_hex(num / 16, param);
+		ft_putnbr_hex(num % 16, param);
+	}
+}
+
+int		ft_numlen_hex(unsigned num)
+{
+	int 		len;
+	
+	if (num == 0)
+		return (1);
+	len = 0;
+	while (num > 0)
+	{
+		num = num / 16;
 		len++;
 	}
 	return (len);

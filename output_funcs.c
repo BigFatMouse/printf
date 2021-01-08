@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   output_funcs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:24:18 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 21:38:12 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/09 02:18:20 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_put_minus(int num, t_arg *param)
+void	ft_put_minus(int minus, t_arg *param)
 {
-	if (num < 0)
+	if (minus == 1)
 		ft_putchar('-', param);
 }
 
@@ -36,7 +36,7 @@ void	ft_put_precision(int nulls, t_arg *param)
 		ft_putchar('0', param);
 }
 
-void	ft_print_d(int num, t_arg *param)
+void	ft_print_d(unsigned num, int minus, t_arg *param)
 {
 	int	numlen;
 	int	nulls;
@@ -55,33 +55,33 @@ void	ft_print_d(int num, t_arg *param)
 		nulls = param->precision - numlen;
 		numlen = param->precision;
 	}
-	if (num < 0)
+	if (minus == 1)
 		numlen++;
-	ft_print_d_part2(num, numlen, nulls, param);
+	ft_print_d_part2(num, minus, numlen, nulls, param);
 }
 
-void	ft_print_d_part2(int num, int numlen, int nulls, t_arg *param)
+void	ft_print_d_part2(unsigned num, int minus, int numlen, int nulls, t_arg *param)
 {
 	if (param->flag == '-')
 	{
-		ft_put_minus(num, param);
+		ft_put_minus(minus, param);
 		ft_put_precision(nulls, param);
-		ft_putnbr((long)num, param);
+		ft_putnbr(num, param);
 		ft_put_width(numlen, param);
 	}
 	else	if (param->flag == '0')
 	{
-		ft_put_minus(num, param);
+		ft_put_minus(minus, param);
 		ft_put_width(numlen, param);
 		ft_put_precision(nulls, param);
-		ft_putnbr((long)num, param);
+		ft_putnbr(num, param);
 	}
 	else
 	{
 		ft_put_width(numlen, param);
-		ft_put_minus(num, param);
+		ft_put_minus(minus, param);
 		ft_put_precision(nulls, param);
-		ft_putnbr((long)num, param);
+		ft_putnbr(num, param);
 	}
 }
 
@@ -118,4 +118,9 @@ void	ft_print_c(char c, t_arg *param)
 		ft_put_width(1, param);
 		ft_putchar(c, param);
 	}
+}
+
+void	ft_print_x(unsigned num, t_arg param)
+{
+	
 }

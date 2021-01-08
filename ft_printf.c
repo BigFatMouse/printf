@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/07 22:08:35 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/09 02:18:00 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_printf(const char *str, ...)
 			ft_processor(&param, &args);
 		}
 		else
-			param.len += write(1, str, 1);
+			ft_putchar(*str, &param);
 		str++;
 	}
 	va_end(args);
@@ -80,7 +80,8 @@ void	ft_parser(const char **str, t_arg *param, va_list *args)
 void	ft_pars_flag(const char **str, t_arg *param)
 {
 	char	minus;
-
+	
+	minus = 0;
 	ft_struct_init(param);
 	while ((**str == '-' || **str == '0'))
 	{
@@ -97,9 +98,28 @@ void	ft_pars_flag(const char **str, t_arg *param)
 void	ft_processor(t_arg *param, va_list *args)
 {
 	char	*str;
+	int		num;
+	int		minus;
+	unsigned long n;
 	
+	minus = 0;
 	if (param->type == 'd' || param->type == 'i')
-		ft_print_d(va_arg(*args, int), param);
+		//ft_print_d(va_arg(*args, int), param);
+	{
+		num = va_arg(*args, int);
+		if (num < 0)
+		{
+			n = -num;
+			minus = 1;
+		}
+		else 
+			n = num;
+		ft_print_d(n, minus, param);
+	}
+	if (param->type == 'u')
+		ft_print_d(va_arg(*args, unsigned), 0, param);
+	if (param->type == 'x' || param->type == 'X')
+		ft_print_x(va_arg(*args, unsigned), param);
 	if (param->type == 's')
 	{
 		if (!(str = va_arg(*args, char *)))
