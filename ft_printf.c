@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/09 02:18:00 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 01:27:14 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	ft_struct_init(t_arg *param)
 	param->width = 0;
 	param->precision = -1;
 	param->type = 0;
+	param->minus = 0;
 	param->nul = 0;
+	param->error = 0;
 }
 
 int		ft_printf(const char *str, ...)
@@ -26,10 +28,10 @@ int		ft_printf(const char *str, ...)
 	t_arg	param;
 	va_list args;
 
-	ft_struct_init(&param);
-	param.len = 0;
 	if (!str)
 		return (-1);
+	ft_struct_init(&param);
+	param.len = 0;
 	va_start(args, str);
 	while (*str)
 	{
@@ -37,21 +39,26 @@ int		ft_printf(const char *str, ...)
 		{
 			str++;
 			ft_parser(&str, &param, &args);
+			if (param.error == -1)
+			{
+				va_end(args);
+				return (-1);
+			}
 			ft_processor(&param, &args);
 		}
 		else
 			ft_putchar(*str, &param);
 		str++;
 	}
+//	printf("flag [%c] width [%d] precison [%d] type [%c] len [%d]\n", param.flag, param.width, param.precision, param.type, param.len);
 	va_end(args);
-	//printf("flag [%c] width [%d] precison [%d] type [%c] len [%d]\n", param.flag, param.width, param.precision, param.type, param.len);
 	return (param.len);
 }
 
 void	ft_parser(const char **str, t_arg *param, va_list *args)
 {
 	ft_pars_flag(str, param);
-	if (**str == '*')
+	if (**str == '*' && **str)
 	{
 		if ((param->width = va_arg(*args, int)) < 0)
 		{
@@ -62,7 +69,7 @@ void	ft_parser(const char **str, t_arg *param, va_list *args)
 	}
 	else
 		param->width = ft_atoi_move(str);
-	if (**str == '.')
+	if (**str == '.' && **str)
 	{
 		if (*(++(*str)) == '*')
 		{
@@ -75,12 +82,16 @@ void	ft_parser(const char **str, t_arg *param, va_list *args)
 	if (**str == 'd' || **str == 's' || **str == 'c' || **str == 'p' || **str
 	== 'x' || **str == 'X' || **str == 'i' || **str == 'u' || **str == '%')
 		param->type = **str;
+	if (**str == '\0')
+		param->error = -1;
 }
 
 void	ft_pars_flag(const char **str, t_arg *param)
 {
 	char	minus;
-	
+
+	if (**str == '\0')
+		param->error = -1;
 	minus = 0;
 	ft_struct_init(param);
 	while ((**str == '-' || **str == '0'))
@@ -93,41 +104,4 @@ void	ft_pars_flag(const char **str, t_arg *param)
 	}
 	if (minus == '-')
 		param->flag = '-';
-}
-
-void	ft_processor(t_arg *param, va_list *args)
-{
-	char	*str;
-	int		num;
-	int		minus;
-	unsigned long n;
-	
-	minus = 0;
-	if (param->type == 'd' || param->type == 'i')
-		//ft_print_d(va_arg(*args, int), param);
-	{
-		num = va_arg(*args, int);
-		if (num < 0)
-		{
-			n = -num;
-			minus = 1;
-		}
-		else 
-			n = num;
-		ft_print_d(n, minus, param);
-	}
-	if (param->type == 'u')
-		ft_print_d(va_arg(*args, unsigned), 0, param);
-	if (param->type == 'x' || param->type == 'X')
-		ft_print_x(va_arg(*args, unsigned), param);
-	if (param->type == 's')
-	{
-		if (!(str = va_arg(*args, char *)))
-			str = "(null)";
-		ft_print_s(str, param);
-	}
-	if (param->type == 'c')
-		ft_print_c(va_arg(*args, int), param);
-	if (param->type == '%')
-		ft_print_c('%', param);
 }

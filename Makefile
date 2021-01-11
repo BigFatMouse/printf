@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mhogg <mhogg@student.42.fr>                +#+  +:+       +#+         #
+#    By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/07 12:40:21 by mhogg             #+#    #+#              #
-#    Updated: 2021/01/07 12:46:20 by mhogg            ###   ########.fr        #
+#    Updated: 2021/01/12 00:25:28 by mhogg            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-SRC = ft_printf.c libft.c output_funcs.c 
+SRC = ft_printf.c ft_processor.c libft.c print_d_i_x_u.c print_c_s.c print_p.c
 HEADER = ft_printf.h
 OBJ = $(SRC:%.c=%.o)
 CC = gcc

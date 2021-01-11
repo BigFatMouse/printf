@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:00:12 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/09 02:10:22 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 01:23:32 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,35 @@ int	main(void)
 	// printf("   printf: |%-5.10d|\n", -123456789);
 	// ft_printf("ft_printf: |%-5.10d|\n", -123456789);
 	
-	//printf("-------------4d error-----------\n");
-	// printf("   printf: |%08.3d|\n", -11111);
-	// ft_printf("ft_printf: |%08.3d|\n", -11111);
-	// printf("   printf: |%*i|\n", -4, 9);
-	// ft_printf("ft_printf: |%*i|\n", -4, 9);
+//	printf("-------------4d error-----------\n");
+	printf("   printf: |%8d|\n", 11111);
+	ft_printf("ft_printf: |%8d|\n", 11111);
+	printf("   printf: |%*i|\n", -4, 9);
+	ft_printf("ft_printf: |%*i|\n", -4, 9);
 	
-	printf("|%020.8u, %*c|\n", 2147483647, 12, '-');
-	ft_printf("|%020.8u, %*c|\n",  2147483647, 12, '-');
-		
+	int	num;
+	char	c = 'c';
+	char *ptr = &c;
+	
+	//printf("|%p, %*c|\n", ptr, 12, '-');
+	//ft_printf("|%p, %*c|\n",  ptr, 12, '-');
+	      
+	// printf("printf:   |%20p|\n", ptr);
+	// ft_printf("ft_printf:|%20p|\n\n", ptr);
+	
+	// printf("printf:   |%p|\n", ptr);
+	// ft_printf("ft_printf:|%p|\n\n", ptr);
+	
+	// printf("printf:   |%0p|\n", NULL);
+	// ft_printf("ft_printf:|%0p|\n\n", NULL);
+	
+	//printf(NULL);
+	// ft_printf("|%2.9p|\n", 1234);
+	// printf("|%2.9p|\n", 1234);
+	
+	// int a = -4;
+	
+	// printf("printf:   |%*p|, |%*p|\n", a, (void *)123, a, NULL);
+	// ft_printf("ft_printf:|%*p|, |%*p|\n", a, (void *)123, a, NULL);
+	// ft_printf("ft_printf:|%-4p|, |%-4p|\n", (void *)1, NULL);
 }
