@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/12 01:27:14 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 18:30:54 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ int		ft_printf(const char *str, ...)
 
 	if (!str)
 		return (-1);
-	ft_struct_init(&param);
 	param.len = 0;
 	va_start(args, str);
 	while (*str)
 	{
-		if (*str == '%')
+		if (*str == '%' && *(++str))
 		{
-			str++;
 			ft_parser(&str, &param, &args);
-			if (param.error == -1)
+			if (param.len == -1)
 			{
 				va_end(args);
 				return (-1);
@@ -50,15 +48,27 @@ int		ft_printf(const char *str, ...)
 			ft_putchar(*str, &param);
 		str++;
 	}
-//	printf("flag [%c] width [%d] precison [%d] type [%c] len [%d]\n", param.flag, param.width, param.precision, param.type, param.len);
 	va_end(args);
 	return (param.len);
 }
 
-void	ft_parser(const char **str, t_arg *param, va_list *args)
+void	ft_parser_part1(const char **str, t_arg *param, va_list *args)
 {
-	ft_pars_flag(str, param);
-	if (**str == '*' && **str)
+	char	minus;
+
+	minus = 0;
+	ft_struct_init(param);
+	while ((**str == '-' || **str == '0'))
+	{
+		if (**str == '-')
+			minus = '-';
+		if (**str == '0')
+			param->flag = '0';
+		(*str)++;
+	}
+	if (minus == '-')
+		param->flag = '-';
+	if (**str == '*')
 	{
 		if ((param->width = va_arg(*args, int)) < 0)
 		{
@@ -69,7 +79,12 @@ void	ft_parser(const char **str, t_arg *param, va_list *args)
 	}
 	else
 		param->width = ft_atoi_move(str);
-	if (**str == '.' && **str)
+}
+
+void	ft_parser(const char **str, t_arg *param, va_list *args)
+{
+	ft_parser_part1(str, param, args);
+	if (**str == '.')
 	{
 		if (*(++(*str)) == '*')
 		{
@@ -83,25 +98,5 @@ void	ft_parser(const char **str, t_arg *param, va_list *args)
 	== 'x' || **str == 'X' || **str == 'i' || **str == 'u' || **str == '%')
 		param->type = **str;
 	if (**str == '\0')
-		param->error = -1;
-}
-
-void	ft_pars_flag(const char **str, t_arg *param)
-{
-	char	minus;
-
-	if (**str == '\0')
-		param->error = -1;
-	minus = 0;
-	ft_struct_init(param);
-	while ((**str == '-' || **str == '0'))
-	{
-		if (**str == '-')
-			minus = '-';
-		if (**str == '0')
-			param->flag = '0';
-		(*str)++;
-	}
-	if (minus == '-')
-		param->flag = '-';
+		param->len = -1;
 }

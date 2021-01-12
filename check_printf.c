@@ -14,13 +14,13 @@ int main (void)
     // printf("\n-- conversions: cspdiuxX%% --\n");
 
     // printf("c: %c\n", c);           //%c
-    printf("pointer: %u\n", 10326d4e80);         //%s
-    printf(" 20p  |%20p|\n", &str);         //%p
-	printf("-20p  |%-20p|\n", &str);         //%p
-	printf("5p, 123 |%5p|\n", (void *)123456);         //%p
-	printf(".10p  |%.10p|\n", &str);         //%p
-	printf("0.p, null |%0.p|\n", NULL);         //%p
-	printf(" .p, null |%.p|\n", NULL);
+    //printf("pointer: %u\n", 10326d4e80);         //%s
+    // printf(" 20p  |%20p|\n", &str);         //%p
+	// printf("-20p  |%-20p|\n", &str);         //%p
+	// printf("5p, 123 |%5p|\n", (void *)123456);         //%p
+	// printf(".10p  |%.10p|\n", &str);         //%p
+	printf("-*p, null |%-*p|\n", 12, NULL);         //%p
+	printf("*p, null |%*p|\n", 12, 0);
 	printf("  p, null |%p|\n", NULL);
 	
 	

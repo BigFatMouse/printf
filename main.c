@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 16:00:12 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/12 01:23:32 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 17:35:00 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	main(void)
 //	printf("-------------4d error-----------\n");
 	printf("   printf: |%8d|\n", 11111);
 	ft_printf("ft_printf: |%8d|\n", 11111);
-	printf("   printf: |%*i|\n", -4, 9);
-	ft_printf("ft_printf: |%*i|\n", -4, 9);
+	//printf(1, -4, 9);
+	ft_printf(NULL, -4, 9);
 	
 	int	num;
 	char	c = 'c';
