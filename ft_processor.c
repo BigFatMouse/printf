@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 00:24:32 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/12 00:57:51 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 19:29:27 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_processor(t_arg *param, va_list *args)
 	if (param->type == 'u')
 		ft_print_d(va_arg(*args, unsigned), 10, param);
 	if (param->type == 'x' || param->type == 'X')
-	 	ft_print_d(va_arg(*args, unsigned), 16, param);
+		ft_print_d(va_arg(*args, unsigned), 16, param);
 	if (param->type == 'p')
 		ft_print_p(va_arg(*args, void *), param);
 	if (param->type == 's')
