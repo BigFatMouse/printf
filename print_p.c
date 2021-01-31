@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 23:13:09 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/12 00:59:03 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 19:52:01 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	ft_putprefix(t_arg *param)
 
 void	ft_print_p(void *n, t_arg *param)
 {
-	int					numlen;
-	unsigned long long	num;
+	int				numlen;
+	unsigned long	num;
 
 	if (n == NULL)
 		num = 0;
-	num = (unsigned long long)n;
+	num = (unsigned long)n;
 	numlen = ft_ptrlen(num);
 	if (param->precision == 0 && n == NULL)
 	{
@@ -70,7 +70,7 @@ void	ft_print_p(void *n, t_arg *param)
 	ft_print_p_part2(num, param, numlen);
 }
 
-void	ft_print_p_part2(unsigned long long num, t_arg *param, int numlen)
+void	ft_print_p_part2(unsigned long num, t_arg *param, int numlen)
 {
 	if (param->flag == '-')
 	{

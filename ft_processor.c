@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 00:24:32 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/12 19:29:27 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 19:50:03 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_process_d(t_arg *param, va_list *args)
 {
-	int				num;
-	unsigned long	n;
+	int			num;
+	unsigned	n;
 
 	num = va_arg(*args, int);
 	if (num < 0)

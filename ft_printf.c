@@ -6,7 +6,7 @@
 /*   By: mhogg <mhogg@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 20:22:06 by mhogg             #+#    #+#             */
-/*   Updated: 2021/01/12 18:30:54 by mhogg            ###   ########.fr       */
+/*   Updated: 2021/01/12 19:49:28 by mhogg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_struct_init(t_arg *param)
 	param->type = 0;
 	param->minus = 0;
 	param->nul = 0;
-	param->error = 0;
 }
 
 int		ft_printf(const char *str, ...)
